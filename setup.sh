@@ -20,7 +20,11 @@ osx() {
 
 install_apt() {
     sudo apt-get update || true
-    sudo apt-get -y install gdb python-dev python3-dev python-pip python3-pip libglib2.0-dev libc6-dbg
+    if lsb_release -d | grep "Ubuntu 20.04" > /dev/null; then 
+        sudo apt-get -y install gdb python-dev python3-dev python3-pip libglib2.0-dev libc6-dbg
+    else
+        sudo apt-get -y install gdb python-dev python3-dev python-pip python3-pip libglib2.0-dev libc6-dbg
+    fi
 
     if uname -m | grep x86_64 > /dev/null; then
         sudo apt-get -y install libc6-dbg:i386 || true
